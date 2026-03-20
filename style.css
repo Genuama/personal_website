@@ -1,3 +1,16 @@
+:root {
+    --bg: #f0fdf9;
+    --nav-bg: #0c4a6e;
+    --nav-hover: #6ee7b7;
+    --accent: #0284c7;
+    --accent-light: #e0f2fe;
+    --accent2: #059669;
+    --text: #0f172a;
+    --muted: #475569;
+    --card-bg: #ffffff;
+    --border: #a7f3d0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,27 +19,27 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
-    color: #222;
+    background-color: var(--bg);
+    color: var(--text);
     line-height: 1.6;
 }
 
 nav {
-    background-color: #111;
+    background-color: var(--nav-bg);
     padding: 1rem 2rem;
     display: flex;
     gap: 1.5rem;
 }
 
 nav a {
-    color: #fff;
+    color: #c7d2fe;
     text-decoration: none;
     font-size: 0.95rem;
     letter-spacing: 0.05em;
 }
 
 nav a:hover {
-    color: #aaa;
+    color: var(--nav-hover);
 }
 
 main {
@@ -38,15 +51,17 @@ main {
 h1 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    color: var(--text);
 }
 
 h2 {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
+    color: var(--accent);
 }
 
 p {
-    color: #555;
+    color: var(--muted);
     margin-bottom: 1.5rem;
 }
 
@@ -67,25 +82,81 @@ p {
 
 .reveal-btn {
     margin-top: 1.5rem;
-    background: none;
-    border: 1px solid #ccc;
+    background: var(--accent-light);
+    border: 1.5px solid var(--accent);
     border-radius: 6px;
     padding: 0.5rem 1.1rem;
     font-size: 0.9rem;
     cursor: pointer;
-    color: #333;
+    color: var(--accent);
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
 }
 
 .reveal-btn:hover {
-    border-color: #111;
-    color: #111;
+    background: var(--accent);
+    color: #fff;
 }
 
-/* Hero */
-.hero p {
-    font-size: 1.1rem;
-    color: #444;
+/* Hero Banner */
+.hero-banner {
+    background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 55%, #059669 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-eyebrow {
+    font-size: 1rem;
+    color: #bae6fd;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+}
+
+.hero-banner h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-sub {
+    font-size: 1.05rem;
+    color: #6ee7b7;
+    margin-bottom: 1.75rem;
+}
+
+.hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+}
+
+.chip {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #d1fae5;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+}
+
+/* Hero section below banner */
+.hero {
+    padding-top: 2rem;
+}
+
+.hero-desc {
+    font-size: 1.05rem;
+    color: #0369a1;
     max-width: 600px;
+    margin-bottom: 0;
 }
 
 /* Sections */
@@ -102,8 +173,8 @@ p {
 }
 
 .skill-group {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     padding: 1rem 1.25rem;
     flex: 1;
@@ -114,19 +185,19 @@ p {
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #888;
+    color: var(--accent2);
     margin-bottom: 0.4rem;
 }
 
 .skill-group p {
-    color: #222;
+    color: var(--text);
     margin: 0;
     font-size: 0.9rem;
 }
 
 /* Experience */
 .experience {
-    border-left: 3px solid #e0e0e0;
+    border-left: 3px solid var(--accent);
     padding-left: 1.25rem;
     margin-bottom: 1.75rem;
 }
@@ -140,19 +211,19 @@ p {
 }
 
 .exp-header span {
-    color: #888;
+    color: var(--accent2);
     font-size: 0.875rem;
 }
 
 .experience p {
-    color: #888;
+    color: var(--muted);
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
 }
 
 .experience ul {
     padding-left: 1.2rem;
-    color: #444;
+    color: #374151;
     font-size: 0.925rem;
 }
 
@@ -162,8 +233,8 @@ p {
 
 /* Projects */
 .project {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     padding: 1.25rem;
     margin-bottom: 1rem;
@@ -186,16 +257,16 @@ p {
 }
 
 .badge {
-    background: #111;
+    background: linear-gradient(135deg, #0284c7, #059669);
     color: #fff;
     font-size: 0.75rem;
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 0.7rem;
     border-radius: 999px;
 }
 
 .tech-stack {
     font-size: 0.85rem;
-    color: #888;
+    color: var(--accent2);
     margin-bottom: 0.5rem !important;
 }
 
@@ -208,23 +279,108 @@ p {
 }
 
 .fun-card {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     padding: 1.25rem;
     flex: 1;
     min-width: 180px;
+    border-top: 3px solid var(--accent);
 }
 
 .fun-card h3 {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    color: var(--accent);
 }
 
 .fun-card p {
-    color: #555;
+    color: var(--muted);
     font-size: 0.9rem;
     margin: 0;
+}
+
+/* Game */
+.game-box {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+}
+
+.game-clue {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
+.game-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.game-option {
+    padding: 0.65rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.game-option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-light);
+}
+
+.game-option.correct {
+    background: #d1fae5;
+    border-color: #059669;
+    color: #065f46;
+    font-weight: 600;
+}
+
+.game-option.wrong {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #991b1b;
+}
+
+.game-feedback {
+    font-size: 0.9rem;
+    color: var(--muted);
+    min-height: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-score {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: right;
+}
+
+.game-result {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.game-result-score {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.game-result p {
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    color: var(--text);
 }
 
 /* Contact form */
@@ -238,29 +394,31 @@ p {
 .contact-form label {
     font-weight: 600;
     font-size: 0.9rem;
+    color: var(--text);
 }
 
 .contact-form input,
 .contact-form textarea {
     padding: 0.65rem 0.9rem;
-    border: 1px solid #ccc;
+    border: 1.5px solid var(--border);
     border-radius: 6px;
     font-size: 0.95rem;
     font-family: inherit;
-    background: #fff;
+    background: var(--card-bg);
     width: 100%;
+    color: var(--text);
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #555;
+    border-color: var(--accent);
 }
 
 .contact-form button {
     align-self: flex-start;
     padding: 0.65rem 1.5rem;
-    background-color: #111;
+    background: linear-gradient(135deg, #0284c7, #059669);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -269,7 +427,7 @@ p {
 }
 
 .contact-form button:hover {
-    background-color: #333;
+    opacity: 0.9;
 }
 
 /* Socials */
@@ -281,13 +439,14 @@ p {
 }
 
 .socials a {
-    color: #111;
+    color: var(--accent);
     text-decoration: none;
     font-weight: 500;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid var(--border);
     padding-bottom: 2px;
 }
 
 .socials a:hover {
-    border-color: #111;
+    border-color: var(--accent);
+    color: var(--accent2);
 }

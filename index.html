@@ -13,10 +13,23 @@
         <a href="contacts.html">Contact</a>
     </nav>
 
+    <div class="hero-banner">
+        <div class="hero-inner">
+            <p class="hero-eyebrow">Hey there, I'm</p>
+            <h1>Ama Abrokwa</h1>
+            <p class="hero-sub">CS student · Software Engineer · Researcher</p>
+            <div class="hero-chips">
+                <span class="chip">📍 Mount Holyoke College</span>
+                <span class="chip">🎓 Graduating May 2026</span>
+                <span class="chip">💼 Ex-Remitly Intern</span>
+                <span class="chip">🏆 Hackathon Winner</span>
+            </div>
+        </div>
+    </div>
+
     <main>
         <section class="hero">
-            <h1>Hi, I'm Ama Abrokwa</h1>
-            <p>Computer Science student at Mount Holyoke College, graduating May 2026. I build things with Java, Python, and JavaScript — from backend APIs to research tools.</p>
+            <p class="hero-desc">I build things with Java, Python, and JavaScript — from backend APIs to research tools. I care about writing clean code and making technology accessible to people.</p>
             <button class="reveal-btn" onclick="reveal('skills-section', this)">What I know →</button>
         </section>
 
@@ -96,10 +109,53 @@
                     <p>As a TA for Statistics and Mathematics, I tutor 30+ students in calculus. Helping others click with something difficult is one of my favorite things.</p>
                 </div>
             </div>
+            <button class="reveal-btn" onclick="reveal('game-section', this)">Think you know me? →</button>
+        </section>
+
+        <section class="section hidden" id="game-section">
+            <h2>Guess Where Ama Has Been 🌍</h2>
+            <p style="margin-bottom:1rem; color: var(--muted);">Read the clue and pick the right place. How well do you know her story?</p>
+            <div class="game-box" id="game-box">
+                <div class="game-clue" id="game-clue"></div>
+                <div class="game-options" id="game-options"></div>
+                <div class="game-feedback" id="game-feedback"></div>
+                <div class="game-score" id="game-score"></div>
+            </div>
         </section>
     </main>
 
     <script>
+        const audio = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playTone(frequency, duration, type = 'sine', volume = 0.3) {
+            const osc = audio.createOscillator();
+            const gain = audio.createGain();
+            osc.connect(gain);
+            gain.connect(audio.destination);
+            osc.type = type;
+            osc.frequency.setValueAtTime(frequency, audio.currentTime);
+            gain.gain.setValueAtTime(volume, audio.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + duration);
+            osc.start(audio.currentTime);
+            osc.stop(audio.currentTime + duration);
+        }
+
+        function playCorrect() {
+            playTone(523, 0.12); // C5
+            setTimeout(() => playTone(659, 0.12), 100); // E5
+            setTimeout(() => playTone(784, 0.2), 200); // G5
+        }
+
+        function playWrong() {
+            playTone(200, 0.15, 'sawtooth', 0.2);
+            setTimeout(() => playTone(160, 0.25, 'sawtooth', 0.2), 130);
+        }
+
+        function playFinish() {
+            const notes = [523, 659, 784, 1047];
+            notes.forEach((freq, i) => setTimeout(() => playTone(freq, 0.2), i * 120));
+        }
+
         function reveal(id, btn) {
             const section = document.getElementById(id);
             section.classList.remove('hidden');
@@ -107,6 +163,150 @@
             btn.style.display = 'none';
             setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
         }
+
+        const questions = [
+            {
+                clue: "🎓 This is where Ama is studying Computer Science and won a prize for excellence in Mathematics.",
+                answer: "South Hadley, MA",
+                options: ["Cambridge, MA", "South Hadley, MA", "New York, NY", "Atlanta, GA"],
+                fact: "Mount Holyoke College is in South Hadley, MA — where she also won the Mildred L. Sanderson Prize!"
+            },
+            {
+                clue: "💼 Ama spent a summer here as a Software Engineering Intern, building tools that helped both engineers and non-technical teams.",
+                answer: "Seattle, WA",
+                options: ["San Francisco, CA", "Austin, TX", "Seattle, WA", "Chicago, IL"],
+                fact: "She interned at Remitly in Seattle, WA in summer 2025 — reducing integration setup time by 40%!"
+            },
+            {
+                clue: "🏆 This city hosted the hackathon where Ama won Best Use of CI/CD out of 50+ submissions.",
+                answer: "Boston, MA",
+                options: ["Boston, MA", "Philadelphia, PA", "Washington, DC", "Providence, RI"],
+                fact: "TechTogether Boston — where The Resource Trouvé took home the Best CI/CD award!"
+            },
+            {
+                clue: "🔬 Ama spent two summers here doing research — one on billiard collisions, one on particle tracking algorithms.",
+                answer: "South Hadley, MA",
+                options: ["New Haven, CT", "Princeton, NJ", "South Hadley, MA", "Amherst, MA"],
+                fact: "Both research roles were at Mount Holyoke College in South Hadley, MA!"
+            },
+            {
+                clue: "🌍 Ama has roots here — this West African country is part of her heritage and she has visited.",
+                answer: "Ghana",
+                options: ["Nigeria", "Ghana", "Senegal", "Kenya"],
+                fact: "Ghana! It's where her roots are 🇬🇭"
+            },
+            {
+                clue: "🌏 Ama has been to this Southeast Asian city-state, known for its food, skyline, and the Merlion.",
+                answer: "Singapore",
+                options: ["Thailand", "Indonesia", "Singapore", "Malaysia"],
+                fact: "Singapore! One of the most vibrant cities in the world 🇸🇬"
+            },
+            {
+                clue: "🇬🇧 Red buses, Big Ben, the Thames — Ama would love to visit this city. Has she been yet?",
+                answer: "Not yet, but it's on the list!",
+                options: ["Yes, she's been!", "Not yet, but it's on the list!", "She goes every year", "She studied there"],
+                fact: "Not yet! But London is very much on Ama's bucket list 🇬🇧"
+            },
+            {
+                clue: "🇰🇷 K-pop, kimchi, and stunning palaces — has Ama visited this East Asian country?",
+                answer: "Not yet — someday!",
+                options: ["Yes, she loved it!", "Not yet — someday!", "She's been twice", "She lived there"],
+                fact: "Not yet! South Korea is high on the wishlist 🇰🇷"
+            },
+            {
+                clue: "🍣 Important question: Does Ama actually like sushi?",
+                answer: "No, not her thing",
+                options: ["Yes, she loves it!", "No, not her thing", "Only California rolls", "She's never tried it"],
+                fact: "Nope! Sushi is a hard pass from Ama 🙅‍♀️"
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = questions[current];
+            document.getElementById('game-clue').textContent = q.clue;
+            document.getElementById('game-feedback').textContent = '';
+
+            const optionsEl = document.getElementById('game-options');
+            optionsEl.innerHTML = '';
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'game-option';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(opt, btn);
+                optionsEl.appendChild(btn);
+            });
+
+            document.getElementById('game-score').textContent = `Question ${current + 1} of ${questions.length}`;
+        }
+
+        function checkAnswer(selected, btn) {
+            const q = questions[current];
+            const allBtns = document.querySelectorAll('.game-option');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (selected === q.answer) {
+                btn.classList.add('correct');
+                score++;
+                playCorrect();
+                document.getElementById('game-feedback').innerHTML = `✅ Correct! ${q.fact}`;
+            } else {
+                btn.classList.add('wrong');
+                allBtns.forEach(b => { if (b.textContent === q.answer) b.classList.add('correct'); });
+                playWrong();
+                document.getElementById('game-feedback').innerHTML = `❌ Not quite! ${q.fact}`;
+            }
+
+            current++;
+            if (current < questions.length) {
+                setTimeout(() => loadQuestion(), 2200);
+            } else {
+                setTimeout(() => { playFinish(); showResult(); }, 2200);
+            }
+        }
+
+        function showResult() {
+            const box = document.getElementById('game-box');
+            const msgs = score === questions.length
+                ? "Perfect score! You really paid attention 🎉"
+                : score >= 7
+                ? "Wow, you know Ama well! 👏"
+                : score >= 5
+                ? "Not bad! You've been paying attention."
+                : score >= 3
+                ? "A few misses — go back and read more! 😄"
+                : "Were you even reading? 😂 Try again!";
+            box.innerHTML = `
+                <div class="game-result">
+                    <div class="game-result-score">${score} / ${questions.length}</div>
+                    <p>${msgs}</p>
+                    <button class="reveal-btn" onclick="restartGame()">Play again →</button>
+                </div>`;
+        }
+
+        function restartGame() {
+            current = 0;
+            score = 0;
+            document.getElementById('game-box').innerHTML = `
+                <div class="game-clue" id="game-clue"></div>
+                <div class="game-options" id="game-options"></div>
+                <div class="game-feedback" id="game-feedback"></div>
+                <div class="game-score" id="game-score"></div>`;
+            loadQuestion();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameSection = document.getElementById('game-section');
+            const observer = new MutationObserver(() => {
+                if (!gameSection.classList.contains('hidden')) {
+                    loadQuestion();
+                    observer.disconnect();
+                }
+            });
+            observer.observe(gameSection, { attributes: true, attributeFilter: ['class'] });
+        });
     </script>
 </body>
 </html>
