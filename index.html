@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name</title>
+    <title>Ama Abrokwa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,8 +14,99 @@
     </nav>
 
     <main>
-        <h1>Hi, I'm Ama Abrokwa</h1>
-        <p>I'm a developer learning Java and Spring Boot. Graduating in May 2026 with a Bachelors degree in Computer Science</p>
+        <section class="hero">
+            <h1>Hi, I'm Ama Abrokwa</h1>
+            <p>Computer Science student at Mount Holyoke College, graduating May 2026. I build things with Java, Python, and JavaScript — from backend APIs to research tools.</p>
+            <button class="reveal-btn" onclick="reveal('skills-section', this)">What I know →</button>
+        </section>
+
+        <section class="section hidden" id="skills-section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <p>Python, Java, JavaScript, TypeScript, C, SQL</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Tools & Frameworks</h3>
+                    <p>React, Node.js, Git, Linux/Unix</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Other</h3>
+                    <p>MATLAB, Golang, HPC, SageMath</p>
+                </div>
+            </div>
+            <button class="reveal-btn" onclick="reveal('experience-section', this)">Where I've worked →</button>
+        </section>
+
+        <section class="section hidden" id="experience-section">
+            <h2>Experience</h2>
+
+            <div class="experience">
+                <div class="exp-header">
+                    <strong>Software Engineering Intern — Remitly</strong>
+                    <span>May 2025 – Aug 2025</span>
+                </div>
+                <p>Seattle, WA</p>
+                <ul>
+                    <li>Designed and built a mock API response platform that reduced integration setup time by 40%, working across multiple teams.</li>
+                    <li>Developed the tool using Java (backend) and TypeScript (UI), making it accessible to non-technical team members.</li>
+                </ul>
+            </div>
+
+            <div class="experience">
+                <div class="exp-header">
+                    <strong>Summer Research Intern — Mount Holyoke Billiards Research Group</strong>
+                    <span>May 2024 – July 2024</span>
+                </div>
+                <ul>
+                    <li>Automated large-scale data processing on HPC clusters with bash scripts, reducing manual effort by 50%.</li>
+                    <li>Applied topological data analysis and graph theory to model billiard collisions.</li>
+                    <li>Built visualizations in Python (matplotlib) and presented findings to 8 research teams.</li>
+                </ul>
+            </div>
+
+            <div class="experience">
+                <div class="exp-header">
+                    <strong>Undergraduate Researcher — Nordstrom Lab, Mount Holyoke</strong>
+                    <span>May 2023 – May 2024</span>
+                </div>
+                <ul>
+                    <li>Developed a novel algorithm improving particle tracking accuracy by 20% in granular material analysis.</li>
+                    <li>Implemented Graph Neural Networks (GNN) using TensorFlow in Python.</li>
+                    <li>Developed MATLAB scripts for statistical analysis and visualization.</li>
+                </ul>
+            </div>
+            <button class="reveal-btn" onclick="reveal('fun-section', this)">Beyond the code →</button>
+        </section>
+
+        <section class="section hidden" id="fun-section">
+            <h2>Beyond the Code</h2>
+            <div class="fun-grid">
+                <div class="fun-card">
+                    <h3>Photography</h3>
+                    <p>I love capturing moments and experimenting with light and composition. Photography gives me a creative outlet away from the screen.</p>
+                </div>
+                <div class="fun-card">
+                    <h3>Piano</h3>
+                    <p>Playing piano is how I unwind. There's something about working through a piece that feels a lot like debugging — patience and iteration.</p>
+                </div>
+                <div class="fun-card">
+                    <h3>Teaching & Mentoring</h3>
+                    <p>As a TA for Statistics and Mathematics, I tutor 30+ students in calculus. Helping others click with something difficult is one of my favorite things.</p>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <script>
+        function reveal(id, btn) {
+            const section = document.getElementById(id);
+            section.classList.remove('hidden');
+            section.classList.add('fade-in');
+            btn.style.display = 'none';
+            setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+        }
+    </script>
 </body>
 </html>
